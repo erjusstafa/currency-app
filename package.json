@@ -10,8 +10,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-navigation/core": "^6.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/routers": "^6.1.0",
     "@reduxjs/toolkit": "^1.6.2",
     "expo": "~43.0.2",
     "expo-status-bar": "~1.1.0",

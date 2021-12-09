@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IAuth {
+export interface IAuth {
   isAuth: boolean;
 }
 const initialState: IAuth = {

@@ -7,6 +7,8 @@ import {
   useWindowDimensions,
   ImageBackground,
   View,
+  TextInputFocusEventData,
+  NativeSyntheticEvent,
 } from "react-native";
 import React, { useState, ReactElement } from "react";
 import { useReduxDispatch } from "../../redux/store";
@@ -23,28 +25,81 @@ interface ITextFields {
   name: string;
   email: string;
   password: string;
+  errorName: any;
+  errorEmail: any;
+  errorPassword: any;
 }
 const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   const dispatch = useReduxDispatch();
   /*   const { height } = useWindowDimensions();*/
-
+  const [toggleSign, setToggleSign] = useState<boolean>(true);
   const [value, setValue] = useState<ITextFields>({
     name: "",
     email: "",
     password: "",
+    errorName: "",
+    errorEmail: "",
+    errorPassword: "",
   });
-  const [error, setError] = useState<string>("");
+
+  const handleToggleSign = () => {
+    setToggleSign(!toggleSign);
+  };
 
   const handleLogin = () => {
     if (isAuth === false) {
-      if (value.name.trim() && value.password.trim() && value.email.trim()) {
+      if ((value.name.trim() && value.password.trim()) || value.email.trim()) {
         dispatch(dispatch(LogInOut(true)));
         navigation.navigate("Home");
-      } else {
-        return;
       }
     } else {
       dispatch(dispatch(LogInOut(false)));
+    }
+  };
+
+  const emailValidator = (event: any) => {
+    let reg: any = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!reg.test(event)) {
+      setValue({
+        ...value,
+        errorEmail: "Please enter a valid email address",
+        email: event,
+      });
+    } else {
+      setValue({ ...value, email: event, errorEmail: "" });
+    }
+  };
+
+  const nameValidatin = (event: any): void => {
+    if (value.name.length < 8) {
+      setValue({
+        ...value,
+        errorName: "Please insert 8 char or more!",
+        name: event,
+      });
+    } else {
+      setValue({
+        ...value,
+        errorName: "",
+        name: event,
+      });
+    }
+  };
+
+  const passValidatin = (event: any): void => {
+    const letterNumber = /^[0-9a-zA-Z]+$/;
+    if (value.password.match(letterNumber)) {
+      setValue({
+        ...value,
+        errorPassword: "",
+        password: event,
+      });
+    } else {
+      setValue({
+        ...value,
+        errorPassword: "Must contains letter and number",
+        password: event,
+      });
     }
   };
 
@@ -69,32 +124,39 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               placeholder="name"
               style={styleLogin.inputsItems}
               value={value.name}
-              onChangeText={(e: string) => setValue({ ...value, name: e })}
+              onChangeText={(event: string) => nameValidatin(event)}
             />
-            <Text>{error}</Text>
             <Icon
               name={"user"}
               size={30}
               color="#429be4"
               style={styleLogin.icon}
             />
+            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
+              {value.errorName}
+            </Text>
           </View>
 
-          <View>
-            <TextInput
-              placeholder="email"
-              style={[styleLogin.inputsItems]}
-              value={value.email}
-              onChangeText={(e: string) => setValue({ ...value, email: e })}
-            />
+          {!toggleSign && (
+            <View>
+              <TextInput
+                placeholder="email"
+                style={styleLogin.inputsItems}
+                value={value.email}
+                onChangeText={(event: string) => emailValidator(event)}
+              />
 
-            <Icon
-              name={"envelope"}
-              size={30}
-              color="#429be4"
-              style={[styleLogin.icon]}
-            />
-          </View>
+              <Icon
+                name={"envelope"}
+                size={30}
+                color="#429be4"
+                style={styleLogin.icon}
+              />
+              <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
+                {value.errorEmail}
+              </Text>
+            </View>
+          )}
 
           <View>
             <TextInput
@@ -103,7 +165,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               value={value.password}
               secureTextEntry={true}
               autoCorrect={true}
-              onChangeText={(e: string) => setValue({ ...value, password: e })}
+              onChangeText={(event: string) => passValidatin(event)}
             />
 
             <Icon
@@ -112,17 +174,27 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               color="#429be4"
               style={styleLogin.icon}
             />
+
+            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
+              {value.errorPassword}
+            </Text>
           </View>
 
-          {/*    {isAuth === false ? ( */}
-          <Pressable style={styleLogin.button} onPress={handleLogin}>
-            <Text style={styleLogin.buttonTxt}>Log In</Text>
-          </Pressable>
-          {/* ) : (
+          {toggleSign ? (
             <Pressable style={styleLogin.button} onPress={handleLogin}>
-              <Text style={styleLogin.buttonTxt}>Log Out</Text>
+              <Text style={styleLogin.buttonTxt}>Log In</Text>
             </Pressable>
-          )} */}
+          ) : (
+            <Pressable style={styleLogin.button} onPress={handleLogin}>
+              <Text style={styleLogin.buttonTxt}>Register</Text>
+            </Pressable>
+          )}
+          <Text onPress={handleToggleSign} style={styleLogin.wrappHaveAcc}>
+            {toggleSign && (
+              <Text style={styleLogin.haveAcc}> Don't have an acc?</Text>
+            )}
+            {toggleSign ? "Register" : "Log In"}
+          </Text>
         </View>
       </View>
     </View>

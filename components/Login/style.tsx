@@ -31,7 +31,7 @@ const styleLogin = StyleSheet.create({
     backgroundColor: "#fbfbfb",
     padding: 15,
     marginVertical: 5,
-    borderRadius: 5,
+    borderRadius: 6,
     paddingHorizontal: 50,
     borderWidth: 1,
     borderColor: "#f6f5f5",
@@ -73,6 +73,14 @@ const styleLogin = StyleSheet.create({
   buttonTxt: {
     color: "white",
     fontSize: 15,
+  },
+  wrappHaveAcc: {
+    color: "#429be4",
+    textAlign: "center",
+  },
+  haveAcc: {
+    color: "#999a9b",
+    paddingHorizontal: 10,
   },
 });
 
