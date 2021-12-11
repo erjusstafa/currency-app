@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { StyleSheet } from "react-native";
 import Login from "./components/Login";
-import { useReduxSelector } from "./redux/store";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/core";
@@ -9,6 +8,7 @@ import { ParamListBase } from "@react-navigation/routers";
 import Home from "./components/Home";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
+import { useReduxSelector } from "./redux/hooks";
 
 const Stack = createNativeStackNavigator();
 

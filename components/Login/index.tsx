@@ -11,10 +11,10 @@ import {
   NativeSyntheticEvent,
 } from "react-native";
 import React, { useState, ReactElement } from "react";
-import { useReduxDispatch } from "../../redux/store";
 import styleLogin from "./style";
 import { LogInOut } from "../../redux/authentication/authSlice";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useReduxDispatch } from "../../redux/hooks";
 
 interface ILogin {
   isAuth: boolean;
@@ -132,9 +132,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               color="#429be4"
               style={styleLogin.icon}
             />
-            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-              {value.errorName}
-            </Text>
+            <Text style={styleLogin.errorText}>{value.errorName}</Text>
           </View>
 
           {!toggleSign && (
@@ -152,9 +150,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
                 color="#429be4"
                 style={styleLogin.icon}
               />
-              <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-                {value.errorEmail}
-              </Text>
+              <Text style={styleLogin.errorText}>{value.errorEmail}</Text>
             </View>
           )}
 
@@ -175,9 +171,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               style={styleLogin.icon}
             />
 
-            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-              {value.errorPassword}
-            </Text>
+            <Text style={styleLogin.errorText}>{value.errorPassword}</Text>
           </View>
 
           {toggleSign ? (
@@ -190,8 +184,10 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
             </Pressable>
           )}
           <Text onPress={handleToggleSign} style={styleLogin.wrappHaveAcc}>
-            {toggleSign && (
-              <Text style={styleLogin.haveAcc}> Don't have an acc?</Text>
+            {toggleSign ? (
+              <Text style={styleLogin.haveAcc}> Don't have an account?</Text>
+            ) : (
+              <Text style={styleLogin.haveAcc}> Back to</Text>
             )}
             {toggleSign ? "Register" : "Log In"}
           </Text>

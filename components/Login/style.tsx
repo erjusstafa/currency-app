@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const styleLogin = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
   },
   backgroundImage: {
     height: "100%",
@@ -11,7 +10,6 @@ const styleLogin = StyleSheet.create({
     top: "0%",
   },
   text: {
-    color: "#074427",
     alignItems: "center",
     height: "100%",
     borderTopLeftRadius: 50,
@@ -29,7 +27,7 @@ const styleLogin = StyleSheet.create({
   },
   inputsItems: {
     backgroundColor: "#fbfbfb",
-    padding: 15,
+    padding: 10,
     marginVertical: 5,
     borderRadius: 6,
     paddingHorizontal: 50,
@@ -51,6 +49,7 @@ const styleLogin = StyleSheet.create({
     position: "absolute",
     top: 15,
     width: 50,
+    fontSize: 20,
     textAlign: "center",
     alignContent: "center",
     justifyContent: "center",
@@ -69,6 +68,13 @@ const styleLogin = StyleSheet.create({
     elevation: 8,
     marginVertical: 30,
     backgroundColor: "#429be4",
+  },
+  errorText: {
+    color: "red",
+    paddingLeft: 10,
+    paddingVertical: 7,
+    marginTop: -10,
+    fontSize: 10,
   },
   buttonTxt: {
     color: "white",
