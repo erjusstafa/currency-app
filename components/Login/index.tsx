@@ -31,7 +31,7 @@ interface ITextFields {
 }
 const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   const dispatch = useReduxDispatch();
-  /*   const { height } = useWindowDimensions();*/
+
   const [toggleSign, setToggleSign] = useState<boolean>(true);
   const [value, setValue] = useState<ITextFields>({
     name: "",
@@ -50,7 +50,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     if (isAuth === false) {
       if ((value.name.trim() && value.password.trim()) || value.email.trim()) {
         dispatch(dispatch(LogInOut(true)));
-        navigation.navigate("Home");
+        navigation.navigate("WrappBottomTabs");
       }
     } else {
       dispatch(dispatch(LogInOut(false)));
@@ -135,7 +135,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
             <Text style={styleLogin.errorText}>{value.errorName}</Text>
           </View>
 
-          {!toggleSign && (
+          {!toggleSign ? (
             <View>
               <TextInput
                 placeholder="email"
@@ -152,7 +152,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               />
               <Text style={styleLogin.errorText}>{value.errorEmail}</Text>
             </View>
-          )}
+          ) : null}
 
           <View>
             <TextInput

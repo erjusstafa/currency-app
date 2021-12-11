@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/core";
 import { ParamListBase } from "@react-navigation/routers";
-import Home from "./components/Home";
+import WrappBottomTabs from "./components/Home";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
 import { useReduxSelector } from "./redux/hooks";
@@ -26,12 +26,7 @@ function Container(): ReactElement {
               navigation: any;
             }) => <Login {...props} isAuth={isAuth} />}
           </Stack.Screen>
-          <Stack.Screen name="Home">
-            {(props: {
-              route: RouteProp<ParamListBase, "Home">;
-              navigation: any;
-            }) => <Home {...props} isAuth={isAuth} />}
-          </Stack.Screen>
+          <Stack.Screen name="WrappBottomTabs" component={WrappBottomTabs} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
