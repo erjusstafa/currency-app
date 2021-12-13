@@ -1,45 +1,37 @@
 import {
-  Button,
   Image,
   Pressable,
   Text,
   TextInput,
-  useWindowDimensions,
   ImageBackground,
   View,
-  TextInputFocusEventData,
-  NativeSyntheticEvent,
 } from "react-native";
 import React, { useState, ReactElement } from "react";
 import styleLogin from "./style";
-import { LogInOut } from "../../redux/authentication/authSlice";
+import { ICredenticial, LogInOut } from "../../redux/authentication/authSlice";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useReduxDispatch } from "../../redux/hooks";
+import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
 
 interface ILogin {
   isAuth: boolean;
   navigation: any;
 }
 
-interface ITextFields {
-  name: string;
-  email: string;
-  password: string;
-  errorName: any;
-  errorEmail: any;
-  errorPassword: any;
-}
 const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   const dispatch = useReduxDispatch();
+  const { email, password, errorName, errorEmail, errorPassword } =
+    useReduxSelector((state) => state.auth.userData);
+
+  const myname = useReduxSelector((state) => state.auth.userData.name);
 
   const [toggleSign, setToggleSign] = useState<boolean>(true);
-  const [value, setValue] = useState<ITextFields>({
-    name: "",
-    email: "",
-    password: "",
-    errorName: "",
-    errorEmail: "",
-    errorPassword: "",
+  const [value, setValue] = useState<ICredenticial>({
+    name: myname,
+    email: email,
+    password: password,
+    errorName: errorName,
+    errorEmail: errorEmail,
+    errorPassword: errorPassword,
   });
 
   const handleToggleSign = () => {
@@ -57,7 +49,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
-  const emailValidator = (event: any) => {
+  const emailValidator = (event: string) => {
     let reg: any = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!reg.test(event)) {
       setValue({
@@ -70,7 +62,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
-  const nameValidatin = (event: any): void => {
+  const nameValidatin = (event: string): void => {
     if (value.name.length < 8) {
       setValue({
         ...value,
@@ -86,7 +78,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
-  const passValidatin = (event: any): void => {
+  const passValidatin = (event: string): void => {
     const letterNumber = /^[0-9a-zA-Z]+$/;
     if (value.password.match(letterNumber)) {
       setValue({
@@ -103,6 +95,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
+  const LoginRegister = () => {};
   return (
     <View style={styleLogin.container}>
       <ImageBackground

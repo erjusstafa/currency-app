@@ -20,13 +20,17 @@ function Container(): ReactElement {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login">
+          <Stack.Screen name="Login" options={{ headerShown: false }}>
             {(props: {
               route: RouteProp<ParamListBase, "Login">;
               navigation: any;
             }) => <Login {...props} isAuth={isAuth} />}
           </Stack.Screen>
-          <Stack.Screen name="WrappBottomTabs" component={WrappBottomTabs} />
+          <Stack.Screen
+            name="WrappBottomTabs"
+            component={WrappBottomTabs}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

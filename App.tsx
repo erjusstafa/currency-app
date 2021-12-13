@@ -5,11 +5,13 @@ import Container from "./Container";
 import store from "./redux/store";
 import { persistStore } from "redux-persist";
 
-let persistorWrapp = store;
+let persistorWrapp = persistStore(store);
 function App(): React.ReactElement {
   return (
     <Provider store={store}>
-      <Container />
+      <PersistGate persistor={persistorWrapp}>
+        <Container />
+      </PersistGate>
     </Provider>
   );
 }

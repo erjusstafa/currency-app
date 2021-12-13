@@ -10,16 +10,19 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-/* 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const persistConfig = {
   key: "root",
-  storage,
+  version: 1,
+  storage: AsyncStorage,
+  blacklist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
- */
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
