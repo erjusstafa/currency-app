@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
-import { View, Text, Pressable, Button } from "react-native";
-import styleLogin from "../Login/style";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../../routes/Home";
 import About from "../../routes/About";
