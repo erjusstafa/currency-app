@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getHomeSuccess } from "./homeSlice";
 
-
 function* workFetchSaga(): any {
   /*   const { name, email, password } = payload; */
   const dataApi = yield call(() =>
