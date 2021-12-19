@@ -99,14 +99,14 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   return (
     <View style={styleLogin.container}>
       <ImageBackground
-        source={require("../../assets/crypto1.jpg")}
+        source={require("../../assets/images/crypto1.jpg")}
         resizeMode="cover"
         style={styleLogin.backgroundImage}
       />
       <View style={styleLogin.text}>
         <View style={styleLogin.logoWrapper}>
           <Image
-            source={require("../../assets/logo.png")}
+            source={require("../../assets/images/logo.png")}
             style={styleLogin.logo}
             resizeMode="contain"
           />

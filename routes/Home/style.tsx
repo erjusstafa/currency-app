@@ -5,6 +5,14 @@ const styleHome = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
   },
+
+  images: {
+    position: "relative",
+    top: 0,
+    zIndex: 9999,
+    width: 50,
+    height: 50,
+  },
 });
 
 export default styleHome;

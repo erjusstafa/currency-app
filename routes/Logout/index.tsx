@@ -16,7 +16,7 @@ const Logout: React.FC = ({ navigation }: any) => {
     <View style={styleLogout.logoutWrapp}>
       <Avatar
         rounded
-        source={require("../../assets/clever.jpg")}
+        source={require("../../assets/images/clever.jpg")}
         size="large"
         containerStyle={styleLogout.avatar}
       />

@@ -9,27 +9,29 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import createSagaMiddleware from "redux-saga";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import createSagaMiddleware from "@redux-saga/core";
+import rootSaga from "./reducerSaga";
 
 const persistConfig = {
   key: "root",
   version: 1,
-  storage: AsyncStorage || storage,
+  storage: AsyncStorage,
   blacklist: ["auth"],
 };
-const saga = createSagaMiddleware;
+const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
   reducer: persistedReducer,
-  /* middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }), */
-  middleware: [saga],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(sagaMiddleware),
 });
+sagaMiddleware.run(rootSaga);
 
 export default store;
 

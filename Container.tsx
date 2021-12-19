@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/core";
 import { ParamListBase } from "@react-navigation/routers";
-import WrappBottomTabs from "./components/Home";
+import WrappBottomTabs from "./components/Content";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
 import { useReduxSelector } from "./redux/hooks";
