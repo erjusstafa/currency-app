@@ -3,12 +3,22 @@ import { StyleSheet } from "react-native";
 const styleHome = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: "red",
   },
 
+  wrapp: {
+    backgroundColor: "blue",
+  },
+
+  data: {
+    paddingHorizontal: 40,
+    paddingVertical: 4,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "yellow",
+  },
   images: {
-    position: "relative",
-    top: 0,
     zIndex: 9999,
     width: 50,
     height: 50,

@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IHomeData {
   isLoading: boolean;
   homeApi: any[];
+  search: string;
 }
 
 const initialState: IHomeData = {
   isLoading: false,
   homeApi: [],
+  search: "",
 };
 
 const homeSlice = createSlice({
@@ -21,8 +23,9 @@ const homeSlice = createSlice({
       state.homeApi = action.payload;
       state.isLoading = false;
     },
-    getHomeFailure: (state, action: PayloadAction<IHomeData>) => {
+    getHomeFailure: (state, action: PayloadAction<IHomeData & any[]>) => {
       state.isLoading = false;
+      state.homeApi = action.payload;
     },
   },
 });
