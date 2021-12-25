@@ -3,19 +3,24 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
   TextInput,
   FlatList,
   ListRenderItemInfo,
+  TouchableOpacity,
 } from "react-native";
 import { EmptyObject } from "redux";
 import styleLogin from "../../components/Login/style";
 import { IAuth } from "../../redux/authentication/authSlice";
 import { getHomeFetch, IHomeData } from "../../redux/home/homeSlice";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
+import List from "../List";
 import styleHome from "./style";
 
-function Home(): ReactElement {
+interface INavigation {
+  navigation: any;
+}
+
+function Home({ navigation }: INavigation): ReactElement {
   const dispatch = useReduxDispatch();
 
   const isAuth = useReduxSelector(
@@ -29,8 +34,13 @@ function Home(): ReactElement {
   );
 
   const [searchval, setSearch] = useState<string>("");
-  const [filteredDataSource, setFilteredDataSource] = useState<any[]>([]);
-  const [masterDataSource, setMasterDataSource] = useState<any[]>(data);
+  const [filteredDataSource, setFilteredDataSource] = useState(data);
+  const [masterDataSource, setMasterDataSource] = useState(data);
+  const [colorPrice, setColorPrice] = useState<string>("");
+
+  useEffect(() => {
+    dispatch(getHomeFetch());
+  }, [dispatch]);
 
   const searchFilterFunction = (text: any) => {
     if (text) {
@@ -46,12 +56,9 @@ function Home(): ReactElement {
       setSearch(text);
     }
   };
-  useEffect(() => {
-    dispatch(getHomeFetch());
-  }, [dispatch]);
 
   return (
-    <ScrollView style={styleHome.container}>
+    <View style={styleHome.container}>
       <View style={styleHome.wrapp}>
         <TextInput
           placeholder="name"
@@ -62,19 +69,12 @@ function Home(): ReactElement {
       </View>
       <FlatList
         data={data}
-        keyExtractor={(item: any) => item.id}
-        renderItem={({ item }: ListRenderItemInfo<any>) => (
-          <View key={item.id} style={styleHome.data}>
-            <Image source={{ uri: item.image }} style={styleHome.images} />
-            <View>
-              <Text>{item.name}</Text>
-              <Text>{item.symbol}</Text>
-            </View>
-          </View>
-        )}
+        keyExtractor={(item: any, index: number) => index.toString()}
+        renderItem={({ item }: ListRenderItemInfo<any>) => {
+          return <List item={item} />;
+        }}
       />
-    </ScrollView>
+    </View>
   );
 }
-
 export default Home;
