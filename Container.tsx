@@ -9,6 +9,7 @@ import WrappBottomTabs from "./components/Content";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
 import { useReduxSelector } from "./redux/hooks";
+import ListItem from "./routes/ListItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ function Container(): ReactElement {
   const { isAuth } = useReduxSelector(
     (state: CombinedState<{ auth: IAuth }>) => state.auth
   );
+
   return (
     <>
       <NavigationContainer>
@@ -31,6 +33,7 @@ function Container(): ReactElement {
             component={WrappBottomTabs}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="ItemDetails" component={ListItem} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

@@ -1,10 +1,19 @@
-import React from "react";
+import { useRoute } from "@react-navigation/native";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { useReduxDispatch } from "../../redux/hooks";
 
-const ListItem = () => {
+interface IRoute {
+  route: any;
+}
+
+const ListItem: React.FC<IRoute> = ({ route }: PropsWithChildren<IRoute>) => {
+  const { payload } = route.params;
+
   return (
     <View>
-      <Text>Hello</Text>
+      <Text>{payload.name}</Text>
+      <Text>{payload.symbol}</Text>
     </View>
   );
 };

@@ -16,7 +16,7 @@ const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    getHomeFetch: (state) => {
+    getHomeFetch: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
     },
     getHomeSuccess: (state, action: PayloadAction<IHomeData & any[]>) => {

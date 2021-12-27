@@ -6,21 +6,20 @@ import {
   TextInput,
   FlatList,
   ListRenderItemInfo,
-  TouchableOpacity,
 } from "react-native";
 import { EmptyObject } from "redux";
 import styleLogin from "../../components/Login/style";
 import { IAuth } from "../../redux/authentication/authSlice";
 import { getHomeFetch, IHomeData } from "../../redux/home/homeSlice";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
-import List from "../List";
+import ListData from "../ListData";
 import styleHome from "./style";
 
-interface INavigation {
+interface Inavigation {
   navigation: any;
 }
 
-function Home({ navigation }: INavigation): ReactElement {
+function Home({ navigation }: Inavigation): ReactElement {
   const dispatch = useReduxDispatch();
 
   const isAuth = useReduxSelector(
@@ -39,7 +38,7 @@ function Home({ navigation }: INavigation): ReactElement {
   const [colorPrice, setColorPrice] = useState<string>("");
 
   useEffect(() => {
-    dispatch(getHomeFetch());
+    dispatch(getHomeFetch(""));
   }, [dispatch]);
 
   const searchFilterFunction = (text: any) => {
@@ -71,7 +70,7 @@ function Home({ navigation }: INavigation): ReactElement {
         data={data}
         keyExtractor={(item: any, index: number) => index.toString()}
         renderItem={({ item }: ListRenderItemInfo<any>) => {
-          return <List item={item} />;
+          return <ListData item={item} navigation={navigation} />;
         }}
       />
     </View>
