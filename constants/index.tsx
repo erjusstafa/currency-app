@@ -1,7 +1,6 @@
-export const BG_HOME = "red";
+export const BG_HOME = "transparnt";
 
-
-export const CoinList = (currency: any) =>
+/* export const CoinList = (currency: any) =>
   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
 export const SingleCoin = (id: any) =>
@@ -12,3 +11,4 @@ export const HistoricalChart = (id: any, days: number = 365, currency: any) =>
 
 export const TrendingCoins = (currency: any) =>
   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`;
+ */
