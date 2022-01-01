@@ -23,7 +23,12 @@ const ListData: React.FC<IItem> = ({
         <View style={styleList.description}>
           <View style={styleList.nameSymbol}>
             <Text style={styleList.name}>{item.name}</Text>
-            <Text style={styleList.symbol}>{item.symbol}</Text>
+            <View style={styleList.rank}>
+              <Text style={styleList.rankItem}>
+                {item.market_data.market_cap_rank}
+              </Text>
+              <Text style={styleList.symbol}>{item.symbol}</Text>
+            </View>
           </View>
           <View style={styleList.current}>
             <Text style={styleList.currentPrice}>

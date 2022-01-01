@@ -34,16 +34,15 @@ function Home({ navigation }: Inavigation): ReactElement {
 
   const [searchval, setSearch] = useState<string>("");
   const [filteredDataSource, setFilteredDataSource] = useState(data);
-  const [masterDataSource, setMasterDataSource] = useState(data);
   const [colorPrice, setColorPrice] = useState<string>("");
 
   useEffect(() => {
     dispatch(getHomeFetch(""));
   }, [dispatch]);
 
-  const searchFilterFunction = (text: any) => {
+  const searchFilterFunction = (text: string) => {
     if (text) {
-      const newData = masterDataSource.filter(function (item) {
+      const newData = filteredDataSource.filter(function (item: any) {
         const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -51,7 +50,7 @@ function Home({ navigation }: Inavigation): ReactElement {
       setFilteredDataSource(newData);
       setSearch(text);
     } else {
-      setFilteredDataSource(masterDataSource);
+      setFilteredDataSource(filteredDataSource);
       setSearch(text);
     }
   };
@@ -67,7 +66,7 @@ function Home({ navigation }: Inavigation): ReactElement {
         />
       </View>
       <FlatList
-        data={data}
+        data={filteredDataSource}
         keyExtractor={(item: any, index: number) => index.toString()}
         renderItem={({ item }: ListRenderItemInfo<any>) => {
           return <ListData item={item} navigation={navigation} />;

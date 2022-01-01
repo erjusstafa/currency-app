@@ -3,6 +3,7 @@ import React, { PropsWithChildren, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { getHomeFetch } from "../../redux/home/homeSlice";
 import { useReduxDispatch } from "../../redux/hooks";
+import styleListItem from "./style";
 
 interface IRoute {
   route: any;

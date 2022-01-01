@@ -26,6 +26,20 @@ const styleList = StyleSheet.create({
     marginHorizontal: 0,
   },
 
+  rank: {
+    display: "flex",
+    flexDirection: "row",
+  },
+
+  rankItem: {
+    width: 25,
+    height: "auto",
+    textAlign: "center",
+    backgroundColor: "#ccc6c6",
+    borderRadius: 6,
+    overflow: "hidden",
+  },
+
   nameSymbol: {
     left: 10,
   },
@@ -36,7 +50,8 @@ const styleList = StyleSheet.create({
   },
   symbol: {
     color: "#b6b6b6",
-    textAlign: "left",
+    position: "relative",
+    left: 5,
   },
 
   current: {
