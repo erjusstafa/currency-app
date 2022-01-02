@@ -6,6 +6,7 @@ import {
   TextInput,
   FlatList,
   ListRenderItemInfo,
+  TouchableOpacity,
 } from "react-native";
 import { EmptyObject } from "redux";
 import styleLogin from "../../components/Login/style";
@@ -14,6 +15,7 @@ import { getHomeFetch, IHomeData } from "../../redux/home/homeSlice";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
 import ListData from "../ListData";
 import styleHome from "./style";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 interface Inavigation {
   navigation: any;
@@ -37,7 +39,7 @@ function Home({ navigation }: Inavigation): ReactElement {
   const [colorPrice, setColorPrice] = useState<string>("");
 
   useEffect(() => {
-    dispatch(getHomeFetch(""));
+    dispatch(getHomeFetch("usd"));
   }, [dispatch]);
 
   const searchFilterFunction = (text: string) => {
@@ -59,11 +61,24 @@ function Home({ navigation }: Inavigation): ReactElement {
     <View style={styleHome.container}>
       <View style={styleHome.wrapp}>
         <TextInput
-          placeholder="name"
-          style={styleLogin.inputsItems}
+          placeholder="Search..."
+          style={styleHome.inputsItems}
           value={searchval}
           onChangeText={(text: string) => searchFilterFunction(text)}
         />
+        <Icon name={"search"} size={20} style={styleHome.icon} />
+      </View>
+
+      <View style={styleHome.tabs}>
+        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("1")}>
+          <Text>1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("2")}>
+          <Text>2</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("3")}>
+          <Text>3</Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={filteredDataSource}

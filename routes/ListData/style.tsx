@@ -38,6 +38,7 @@ const styleList = StyleSheet.create({
     backgroundColor: "#ccc6c6",
     borderRadius: 6,
     overflow: "hidden",
+    color: "#747171",
   },
 
   nameSymbol: {
