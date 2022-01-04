@@ -3,6 +3,7 @@ import {
   BG_LIST_ITEM,
   BG_WHITE,
   GRAY_COLOR,
+  LEYLA_COLOR,
   OTHER_COLOR,
   PRICE_COLOR,
   WHITE_COLOR,
@@ -72,10 +73,10 @@ const styleListItem = StyleSheet.create({
   ButtonBuy: {
     width: 150,
     height: 50,
-    backgroundColor: BG_LIST_ITEM,
+    backgroundColor: LEYLA_COLOR,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 14,
+    borderRadius: 16,
   },
   ButtonSell: {
     width: 150,
@@ -83,7 +84,7 @@ const styleListItem = StyleSheet.create({
     backgroundColor: OTHER_COLOR,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 14,
+    borderRadius: 16,
   },
 });
 

@@ -3,6 +3,7 @@ import {
   BG_LIST_ITEM,
   BG_TRASPARENT,
   BORDER_COLOR,
+  LEYLA_COLOR,
   WHITE_COLOR,
 } from "../../constants";
 
@@ -28,7 +29,7 @@ const styleHome = StyleSheet.create({
   introItem: {
     width: "80%",
     borderRadius: 25,
-    backgroundColor: BG_LIST_ITEM,
+    backgroundColor: LEYLA_COLOR,
   },
   inputsItems: {
     position: "relative",
@@ -45,25 +46,6 @@ const styleHome = StyleSheet.create({
     top: 32,
     left: 32,
     color: BORDER_COLOR,
-  },
-
-  tabs: {
-    width: "100%",
-    paddingVertical: 20,
-    display: "flex",
-    justifyContent: "space-around",
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderColor: BORDER_COLOR,
-
-    shadowRadius: 5,
-  },
-
-  tabsItem: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: BORDER_COLOR,
-    borderRadius: 30,
   },
 });
 

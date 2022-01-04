@@ -31,6 +31,9 @@ const chartSlice = createSlice({
     incrementBasket: (state) => {
       state.basket = state.basket + 1;
     },
+    decrementBasket: (state) => {
+      state.basket = state.basket - 1;
+    },
   },
 });
 
@@ -39,5 +42,6 @@ export const {
   getChartSuccess,
   getChartFailure,
   incrementBasket,
+  decrementBasket,
 } = chartSlice.actions;
 export default chartSlice.reducer;

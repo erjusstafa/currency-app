@@ -8,7 +8,7 @@ import { ParamListBase } from "@react-navigation/routers";
 import WrappBottomTabs from "./components/Content";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
-import { useReduxDispatch, useReduxSelector } from "./redux/hooks";
+import { useReduxSelector } from "./redux/hooks";
 import ListItem from "./routes/ListItem";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { incrementBasket } from "./redux/chart/chartSlice";
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
 });
 
 function Right(): ReactElement {
-  const dispatch = useReduxDispatch();
   const { basket } = useReduxSelector((state) => state.chart);
   return (
     <Fragment>
@@ -73,7 +72,6 @@ function Right(): ReactElement {
           name={"shopping-basket"}
           size={20}
           color="#429be4"
-          onPress={() => dispatch(incrementBasket())}
           style={{ position: "relative" }}
         />
         <Text
