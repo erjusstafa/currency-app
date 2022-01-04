@@ -34,7 +34,6 @@ function WrappBottomTabs(): ReactElement {
                   width: 50,
                   height: 50,
                   borderRadius: 50,
-                  backgroundColor: "green",
                   position: "absolute",
                   top: -25,
                   shadowColor: "#171717",

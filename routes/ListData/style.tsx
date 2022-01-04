@@ -63,6 +63,7 @@ const styleList = StyleSheet.create({
 
   currentPrice: {
     textAlign: "right",
+    fontWeight: "600",
   },
 
   priceChange: {

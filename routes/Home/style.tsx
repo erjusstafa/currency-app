@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
+import {
+  BG_LIST_ITEM,
+  BG_TRASPARENT,
+  BORDER_COLOR,
+  WHITE_COLOR,
+} from "../../constants";
 
 const styleHome = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: WHITE_COLOR,
   },
 
   wrapp: {
@@ -13,13 +19,24 @@ const styleHome = StyleSheet.create({
     borderColor: "#c8c8c8", */
   },
 
+  containerListItem: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  introItem: {
+    width: "80%",
+    borderRadius: 25,
+    backgroundColor: BG_LIST_ITEM,
+  },
   inputsItems: {
     position: "relative",
     paddingHorizontal: 40,
     padding: 12,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "#d8d8d8",
+    borderColor: BORDER_COLOR,
     width: 340,
     left: 18,
   },
@@ -27,7 +44,7 @@ const styleHome = StyleSheet.create({
     position: "absolute",
     top: 32,
     left: 32,
-    color: "#d8d8d8",
+    color: BORDER_COLOR,
   },
 
   tabs: {
@@ -37,16 +54,15 @@ const styleHome = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#d8d8d8",
+    borderColor: BORDER_COLOR,
 
     shadowRadius: 5,
   },
 
   tabsItem: {
     padding: 10,
-    paddingHorizontal: 38,
     borderWidth: 1,
-    borderColor: "#d8d8d8",
+    borderColor: BORDER_COLOR,
     borderRadius: 30,
   },
 });

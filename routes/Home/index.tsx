@@ -1,15 +1,17 @@
-import React, { ReactElement, Suspense, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
 import {
   View,
   Text,
-  Image,
   TextInput,
   FlatList,
   ListRenderItemInfo,
-  TouchableOpacity,
 } from "react-native";
 import { EmptyObject } from "redux";
-import styleLogin from "../../components/Login/style";
 import { IAuth } from "../../redux/authentication/authSlice";
 import { getHomeFetch, IHomeData } from "../../redux/home/homeSlice";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
@@ -36,7 +38,7 @@ function Home({ navigation }: Inavigation): ReactElement {
 
   const [searchval, setSearch] = useState<string>("");
   const [filteredDataSource, setFilteredDataSource] = useState(data);
-  const [colorPrice, setColorPrice] = useState<string>("");
+  const [tab, setTab] = useState<string>("24h");
 
   useEffect(() => {
     dispatch(getHomeFetch("usd"));
@@ -57,36 +59,64 @@ function Home({ navigation }: Inavigation): ReactElement {
     }
   };
 
+  const handleTabs = (item: string) => {
+    setTab(item);
+  };
+
   return (
     <View style={styleHome.container}>
-      <View style={styleHome.wrapp}>
-        <TextInput
-          placeholder="Search..."
-          style={styleHome.inputsItems}
-          value={searchval}
-          onChangeText={(text: string) => searchFilterFunction(text)}
-        />
-        <Icon name={"search"} size={20} style={styleHome.icon} />
-      </View>
+      {isLoading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <Fragment>
+          <View style={styleHome.wrapp}>
+            <TextInput
+              placeholder="Search..."
+              style={styleHome.inputsItems}
+              value={searchval}
+              onChangeText={(text: string) => searchFilterFunction(text)}
+            />
+            <Icon name={"search"} size={20} style={styleHome.icon} />
+          </View>
 
-      <View style={styleHome.tabs}>
-        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("1")}>
-          <Text>1</Text>
+          <View style={styleHome.containerListItem}>
+            <View style={styleHome.introItem}>
+              <Text>.name</Text>
+              <Text>payload.symbol</Text>
+            </View>
+          </View>
+          {/*  <View style={styleHome.tabs}>
+        <TouchableOpacity
+          style={styleHome.tabsItem}
+          onPress={() => handleTabs("24H")}
+        >
+          <Text>1 Hour</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("2")}>
-          <Text>2</Text>
+        <TouchableOpacity
+          style={styleHome.tabsItem}
+          onPress={() => handleTabs("12H")}
+        >
+          <Text>2 Hour</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styleHome.tabsItem} onPress={() => alert("3")}>
-          <Text>3</Text>
+        <TouchableOpacity
+          style={styleHome.tabsItem}
+          onPress={() => handleTabs("3H")}
+        >
+          <Text>3 Hour</Text>
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={filteredDataSource}
-        keyExtractor={(item: any, index: number) => index.toString()}
-        renderItem={({ item }: ListRenderItemInfo<any>) => {
-          return <ListData item={item} navigation={navigation} />;
-        }}
-      />
+      <Text>
+        {tab == "24H" ? "24 HOUR" : tab == "12H" ? "12 HOUR" : "3 HOUR"}
+      </Text> */}
+          <FlatList
+            data={filteredDataSource}
+            keyExtractor={(item: any, index: number) => index.toString()}
+            renderItem={({ item }: ListRenderItemInfo<any>) => {
+              return <ListData item={item} navigation={navigation} />;
+            }}
+          />
+        </Fragment>
+      )}
     </View>
   );
 }

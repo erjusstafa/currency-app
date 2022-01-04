@@ -4,12 +4,14 @@ export interface IHomeData {
   isLoading: boolean;
   homeApi: any[];
   search: string;
+  crypto: string;
 }
 
 const initialState: IHomeData = {
   isLoading: false,
   homeApi: [],
   search: "",
+  crypto: "",
 };
 
 const homeSlice = createSlice({
@@ -18,6 +20,7 @@ const homeSlice = createSlice({
   reducers: {
     getHomeFetch: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
+      state.crypto = action.payload;
     },
     getHomeSuccess: (state, action: PayloadAction<IHomeData & any[]>) => {
       state.homeApi = action.payload;

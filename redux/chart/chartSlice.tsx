@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IChartData {
   isLoading: boolean;
   chartApi: any[];
+  basket: number;
 }
 
 const initialState: IChartData = {
   chartApi: [],
   isLoading: false,
+  basket: 0,
 };
 
 const chartSlice = createSlice({
@@ -25,9 +27,17 @@ const chartSlice = createSlice({
       state.isLoading = false;
       state.chartApi = action.payload;
     },
+
+    incrementBasket: (state) => {
+      state.basket = state.basket + 1;
+    },
   },
 });
 
-export const { getChartFetch, getChartSuccess, getChartFailure } =
-  chartSlice.actions;
+export const {
+  getChartFetch,
+  getChartSuccess,
+  getChartFailure,
+  incrementBasket,
+} = chartSlice.actions;
 export default chartSlice.reducer;

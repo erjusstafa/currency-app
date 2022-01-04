@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { StyleSheet } from "react-native";
+import React, { Fragment, ReactElement } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import Login from "./components/Login";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,8 +8,11 @@ import { ParamListBase } from "@react-navigation/routers";
 import WrappBottomTabs from "./components/Content";
 import { CombinedState } from "redux";
 import { IAuth } from "./redux/authentication/authSlice";
-import { useReduxSelector } from "./redux/hooks";
+import { useReduxDispatch, useReduxSelector } from "./redux/hooks";
 import ListItem from "./routes/ListItem";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { incrementBasket } from "./redux/chart/chartSlice";
+import { LEYLA_COLOR } from "./constants";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +36,15 @@ function Container(): ReactElement {
             component={WrappBottomTabs}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ItemDetails" component={ListItem} />
+          <Stack.Screen
+            options={{
+              title: "Detail",
+              headerRight: (props) => <Right {...props} />,
+              headerLeft: (props) => <Left {...props} />,
+            }}
+            name="ItemDetails"
+            component={ListItem}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
@@ -51,3 +62,35 @@ const styles = StyleSheet.create({
     top: "0%",
   },
 });
+
+function Right(): ReactElement {
+  const dispatch = useReduxDispatch();
+  const { basket } = useReduxSelector((state) => state.chart);
+  return (
+    <Fragment>
+      <View>
+        <Icon
+          name={"shopping-basket"}
+          size={20}
+          color="#429be4"
+          onPress={() => dispatch(incrementBasket())}
+          style={{ position: "relative" }}
+        />
+        <Text
+          style={{
+            position: "absolute",
+            right: -7,
+            top: -10,
+            color: LEYLA_COLOR,
+          }}
+        >
+          {basket}
+        </Text>
+      </View>
+    </Fragment>
+  );
+}
+
+function Left(): ReactElement {
+  return <Icon name={"angle-left"} size={30} color="#429be4" />;
+}

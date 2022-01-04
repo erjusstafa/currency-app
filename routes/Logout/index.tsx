@@ -1,5 +1,12 @@
 import React, { ReactNode } from "react";
-import { ImageBackground, Pressable, Text, TouchableOpacity, TouchableOpacityBase, View } from "react-native";
+import {
+  ImageBackground,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityBase,
+  View,
+} from "react-native";
 import styleLogout from "./style";
 import { Avatar } from "react-native-elements";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
@@ -21,7 +28,10 @@ const Logout: React.FC = ({ navigation }: any) => {
         containerStyle={styleLogout.avatar}
       />
       <Text>{name}</Text>
-      <TouchableOpacity onPress={() => handleLogOut()} style={styleLogout.buttonLogout}>
+      <TouchableOpacity
+        onPress={() => handleLogOut()}
+        style={styleLogout.buttonLogout}
+      >
         <Text>Log Out</Text>
       </TouchableOpacity>
     </View>
