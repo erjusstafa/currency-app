@@ -37,7 +37,7 @@ const Tabs: React.FC = () => {
           <Text>All</Text>
         </TouchableOpacity>
       </View>
-      <Text style={{ textAlign: "center", position: "relative", top: -10 }}>
+      {/*  <Text style={{ textAlign: "center", position: "relative", top: -10 }}>
         {tab == "24H"
           ? "24 HOUR"
           : tab == "1M"
@@ -45,7 +45,7 @@ const Tabs: React.FC = () => {
           : tab == "1Y"
           ? "1years"
           : "All"}
-      </Text>
+      </Text> */}
     </Fragment>
   );
 };

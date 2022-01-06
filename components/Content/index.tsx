@@ -1,21 +1,66 @@
-import React, { ReactElement } from "react";
-import { View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, { Fragment, ReactElement } from "react";
+import { Text, View } from "react-native";
+import {
+  BottomTabHeaderProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import Home from "../../routes/Home";
 import About from "../../routes/About";
 import Icon from "react-native-vector-icons/FontAwesome";
-import styleHomeRoute from "./style";
 import Logout from "../../routes/Logout";
+import { LEYLA_COLOR, OTHER_COLOR, WHITE_COLOR } from "../../constants";
+import { Avatar } from "react-native-elements";
 
 const BottomTab = createBottomTabNavigator();
 function WrappBottomTabs(): ReactElement {
   return (
-    <>
+    <Fragment>
       <BottomTab.Navigator>
         <BottomTab.Screen
           name="Home"
           component={Home}
           options={{
+            title: "Home",
+            headerStyle: {
+              backgroundColor: "red ",
+              paddingVertical: 60,
+              height: 600,
+            },
+            header: () => (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  alignSelf: "center",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  paddingVertical: 60,
+                  backgroundColor: LEYLA_COLOR,
+                }}
+              >
+                <View>
+                  <Text style={{ color: OTHER_COLOR }}>Welcome</Text>
+                  <Text
+                    style={{
+                      fontWeight: "700",
+                      fontSize: 23,
+                      color: WHITE_COLOR,
+                    }}
+                  >
+                    Erjus Stafa
+                  </Text>
+                </View>
+                <View>
+                  <Avatar
+                    rounded
+                    source={require("../../assets/images/clever.jpg")}
+                    size="medium"
+                  />
+                </View>
+              </View>
+            ),
+
             tabBarIcon: () => (
               <View>
                 <Icon name={"home"} size={30} color="#429be4" />
@@ -34,24 +79,16 @@ function WrappBottomTabs(): ReactElement {
                   width: 50,
                   height: 50,
                   borderRadius: 50,
-                  position: "absolute",
-                  top: -25,
-                  shadowColor: "#171717",
-                  shadowOffset: { width: 0, height: 5 },
-                  shadowOpacity: 0.5,
-                  shadowRadius: 5,
                 }}
               >
                 <Icon
-                  name={"plus"}
+                  name={"bolt"}
                   size={30}
                   color="#429be4"
                   style={{
                     textAlign: "center",
-                    marginVertical: 0,
                     alignItems: "center",
                     alignContent: "center",
-                    marginTop: 10,
                   }}
                 />
               </View>
@@ -63,6 +100,48 @@ function WrappBottomTabs(): ReactElement {
           name="Logout"
           component={Logout}
           options={{
+            title: "Logout",
+            headerStyle: {
+              paddingVertical: 60,
+              height: 600,
+              backgroundColor: LEYLA_COLOR,
+            },
+
+            header: () => (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  alignSelf: "center",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  paddingVertical: 60,
+                  backgroundColor: LEYLA_COLOR,
+                }}
+              >
+                <View>
+                  <Text style={{ color: OTHER_COLOR }}>Goodbye</Text>
+                  <Text
+                    style={{
+                      fontWeight: "700",
+                      fontSize: 23,
+                      color: WHITE_COLOR,
+                    }}
+                  >
+                    Erjus Stafa
+                  </Text>
+                </View>
+                <View>
+                  <Avatar
+                    rounded
+                    source={require("../../assets/images/clever.jpg")}
+                    size="medium"
+                  />
+                </View>
+              </View>
+            ),
+
             tabBarIcon: () => (
               <View>
                 <Icon name={"user"} size={30} color="#429be4" />
@@ -71,7 +150,7 @@ function WrappBottomTabs(): ReactElement {
           }}
         />
       </BottomTab.Navigator>
-    </>
+    </Fragment>
   );
 }
 export default WrappBottomTabs;

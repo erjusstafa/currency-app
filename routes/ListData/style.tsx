@@ -1,14 +1,26 @@
 import { StyleSheet } from "react-native";
+import { BACKGROUND_PRIMARY, WHITE_COLOR } from "../../constants";
 
 const styleList = StyleSheet.create({
+  wrapperList: {
+    backgroundColor: BACKGROUND_PRIMARY,
+  },
   data: {
-    paddingHorizontal: 20,
+    width: "88%",
+    height: 100,
+    alignSelf: "center",
+    borderRadius: 15,
+    paddingHorizontal: 5,
     paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomColor: "#e0e0e0",
-    borderBottomWidth: 1,
+    alignItems: "center",
+    marginVertical: 10,
+    backgroundColor: WHITE_COLOR,
+    shadowColor: "#e3e6e7",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.9,
   },
   images: {
     zIndex: 9,

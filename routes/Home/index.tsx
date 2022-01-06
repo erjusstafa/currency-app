@@ -57,7 +57,7 @@ function Home({ navigation }: Inavigation): ReactElement {
   return (
     <View style={styleHome.container}>
       {isLoading ? (
-        <  Loading title="Please Wait..." />
+        <Loading title="Please Wait..." />
       ) : (
         <Fragment>
           <View style={styleHome.wrapp}>
@@ -70,12 +70,12 @@ function Home({ navigation }: Inavigation): ReactElement {
             <Icon name={"search"} size={20} style={styleHome.icon} />
           </View>
 
-          <View style={styleHome.containerListItem}>
+          {/* <View style={styleHome.containerListItem}>
             <View style={styleHome.introItem}>
               <Text>.name</Text>
               <Text>payload.symbol</Text>
             </View>
-          </View>
+          </View> */}
           <FlatList
             data={filteredDataSource}
             keyExtractor={(item: any, index: number) => index.toString()}

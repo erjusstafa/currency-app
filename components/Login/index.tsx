@@ -11,6 +11,7 @@ import styleLogin from "./style";
 import { ICredenticial, LogInOut } from "../../redux/authentication/authSlice";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
+import { OTHER_COLOR, WHITE_COLOR } from "../../constants";
 
 interface ILogin {
   isAuth: boolean;
@@ -98,11 +99,38 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   const LoginRegister = () => {};
   return (
     <View style={styleLogin.container}>
-      <ImageBackground
+      {/* <ImageBackground
         source={require("../../assets/images/crypto1.jpg")}
         resizeMode="cover"
         style={styleLogin.backgroundImage}
-      />
+      /> */}
+
+      {/*  <ImageBackground
+        source={require("../../assets/images/shapes.svg")}
+        resizeMode="cover"
+        style={styleLogin.backgroundImage}
+      /> */}
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 59,
+        }}
+      >
+        <Text
+          style={{
+            color: WHITE_COLOR,
+            fontSize: 30,
+            textAlign: "center",
+            fontWeight: "800",
+            opacity: 0.5,
+          }}
+        >
+          Crypto Wallet
+        </Text>
+      </View>
+
       <View style={styleLogin.text}>
         <View style={styleLogin.logoWrapper}>
           <Image
@@ -119,12 +147,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               value={value.name}
               onChangeText={(event: string) => nameValidatin(event)}
             />
-            <Icon
-              name={"user"}
-              size={30}
-              color="#429be4"
-              style={styleLogin.icon}
-            />
+            <Icon name={"user"} size={30} style={styleLogin.icon} />
             <Text style={styleLogin.errorText}>{value.errorName}</Text>
           </View>
 
@@ -137,12 +160,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
                 onChangeText={(event: string) => emailValidator(event)}
               />
 
-              <Icon
-                name={"envelope"}
-                size={30}
-                color="#429be4"
-                style={styleLogin.icon}
-              />
+              <Icon name={"envelope"} size={30} style={styleLogin.icon} />
               <Text style={styleLogin.errorText}>{value.errorEmail}</Text>
             </View>
           ) : null}
@@ -157,25 +175,29 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               onChangeText={(event: string) => passValidatin(event)}
             />
 
-            <Icon
-              name={"lock"}
-              size={30}
-              color="#429be4"
-              style={styleLogin.icon}
-            />
+            <Icon name={"lock"} size={30} style={styleLogin.icon} />
 
             <Text style={styleLogin.errorText}>{value.errorPassword}</Text>
           </View>
 
-          {toggleSign ? (
-            <Pressable style={styleLogin.button} onPress={handleLogin}>
-              <Text style={styleLogin.buttonTxt}>Log In</Text>
-            </Pressable>
-          ) : (
-            <Pressable style={styleLogin.button} onPress={handleLogin}>
-              <Text style={styleLogin.buttonTxt}>Register</Text>
-            </Pressable>
-          )}
+          <View
+            style={{
+              position: "relative",
+            }}
+          >
+            {toggleSign ? (
+              <Pressable style={styleLogin.button} onPress={handleLogin}>
+                <Text style={styleLogin.buttonTxt}>
+                  Log In
+                  <Icon name={"lock"} size={30} style={styleLogin.icon} />
+                </Text>
+              </Pressable>
+            ) : (
+              <Pressable style={styleLogin.button} onPress={handleLogin}>
+                <Text style={styleLogin.buttonTxt}>Register </Text>
+              </Pressable>
+            )}
+          </View>
           <Text onPress={handleToggleSign} style={styleLogin.wrappHaveAcc}>
             {toggleSign ? (
               <Text style={styleLogin.haveAcc}> Don't have an account?</Text>

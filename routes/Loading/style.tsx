@@ -17,7 +17,8 @@ const styleLoading = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: LEYLA_COLOR,
+    /*     backgroundColor: LEYLA_COLOR,
+     */
   },
 
   title: {

@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import {
+  BACKGROUND_PRIMARY,
   BG_LIST_ITEM,
   BG_WHITE,
   GRAY_COLOR,
@@ -14,7 +15,7 @@ const styleListItem = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#f6faff",
+    backgroundColor: BACKGROUND_PRIMARY,
   },
 
   introItem: {

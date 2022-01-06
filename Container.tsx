@@ -38,7 +38,7 @@ function Container(): ReactElement {
           />
           <Stack.Screen
             options={{
-              title: "Detail",
+              title: "",
               headerRight: (props) => <Right {...props} />,
               headerLeft: (props) => <Left {...props} />,
             }}

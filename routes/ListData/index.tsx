@@ -17,6 +17,7 @@ const ListData: React.FC<IItem> = ({
   return (
     <Pressable
       onPress={() => navigation.navigate("ItemDetails", { item: item })}
+      style={styleList.wrapperList}
     >
       <View key={item.price_change_24h} style={styleList.data}>
         <Image source={{ uri: item.image }} style={styleList.images} />
