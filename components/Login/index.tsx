@@ -1,45 +1,38 @@
 import {
-  Button,
   Image,
   Pressable,
   Text,
   TextInput,
-  useWindowDimensions,
   ImageBackground,
   View,
-  TextInputFocusEventData,
-  NativeSyntheticEvent,
 } from "react-native";
 import React, { useState, ReactElement } from "react";
-import { useReduxDispatch } from "../../redux/store";
 import styleLogin from "./style";
-import { LogInOut } from "../../redux/authentication/authSlice";
+import { ICredenticial, LogInOut } from "../../redux/authentication/authSlice";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
+import { OTHER_COLOR, WHITE_COLOR } from "../../constants";
 
 interface ILogin {
   isAuth: boolean;
   navigation: any;
 }
 
-interface ITextFields {
-  name: string;
-  email: string;
-  password: string;
-  errorName: any;
-  errorEmail: any;
-  errorPassword: any;
-}
 const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
   const dispatch = useReduxDispatch();
-  /*   const { height } = useWindowDimensions();*/
+  const { email, password, errorName, errorEmail, errorPassword } =
+    useReduxSelector((state) => state.auth.userData);
+
+  const myname = useReduxSelector((state) => state.auth.userData.name);
+
   const [toggleSign, setToggleSign] = useState<boolean>(true);
-  const [value, setValue] = useState<ITextFields>({
-    name: "",
-    email: "",
-    password: "",
-    errorName: "",
-    errorEmail: "",
-    errorPassword: "",
+  const [value, setValue] = useState<ICredenticial>({
+    name: myname,
+    email: email,
+    password: password,
+    errorName: errorName,
+    errorEmail: errorEmail,
+    errorPassword: errorPassword,
   });
 
   const handleToggleSign = () => {
@@ -50,14 +43,14 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     if (isAuth === false) {
       if ((value.name.trim() && value.password.trim()) || value.email.trim()) {
         dispatch(dispatch(LogInOut(true)));
-        navigation.navigate("Home");
+        navigation.navigate("WrappBottomTabs");
       }
     } else {
       dispatch(dispatch(LogInOut(false)));
     }
   };
 
-  const emailValidator = (event: any) => {
+  const emailValidator = (event: string) => {
     let reg: any = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!reg.test(event)) {
       setValue({
@@ -70,7 +63,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
-  const nameValidatin = (event: any): void => {
+  const nameValidatin = (event: string): void => {
     if (value.name.length < 8) {
       setValue({
         ...value,
@@ -86,7 +79,7 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
-  const passValidatin = (event: any): void => {
+  const passValidatin = (event: string): void => {
     const letterNumber = /^[0-9a-zA-Z]+$/;
     if (value.password.match(letterNumber)) {
       setValue({
@@ -103,17 +96,45 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
     }
   };
 
+  const LoginRegister = () => {};
   return (
     <View style={styleLogin.container}>
-      <ImageBackground
-        source={require("../../assets/crypto1.jpg")}
+      {/* <ImageBackground
+        source={require("../../assets/images/crypto1.jpg")}
         resizeMode="cover"
         style={styleLogin.backgroundImage}
-      />
+      /> */}
+
+      {/*  <ImageBackground
+        source={require("../../assets/images/shapes.svg")}
+        resizeMode="cover"
+        style={styleLogin.backgroundImage}
+      /> */}
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 59,
+        }}
+      >
+        <Text
+          style={{
+            color: WHITE_COLOR,
+            fontSize: 30,
+            textAlign: "center",
+            fontWeight: "800",
+            opacity: 0.5,
+          }}
+        >
+          Crypto Wallet
+        </Text>
+      </View>
+
       <View style={styleLogin.text}>
         <View style={styleLogin.logoWrapper}>
           <Image
-            source={require("../../assets/logo.png")}
+            source={require("../../assets/images/logo.png")}
             style={styleLogin.logo}
             resizeMode="contain"
           />
@@ -126,18 +147,11 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               value={value.name}
               onChangeText={(event: string) => nameValidatin(event)}
             />
-            <Icon
-              name={"user"}
-              size={30}
-              color="#429be4"
-              style={styleLogin.icon}
-            />
-            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-              {value.errorName}
-            </Text>
+            <Icon name={"user"} size={30} style={styleLogin.icon} />
+            <Text style={styleLogin.errorText}>{value.errorName}</Text>
           </View>
 
-          {!toggleSign && (
+          {!toggleSign ? (
             <View>
               <TextInput
                 placeholder="email"
@@ -146,17 +160,10 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
                 onChangeText={(event: string) => emailValidator(event)}
               />
 
-              <Icon
-                name={"envelope"}
-                size={30}
-                color="#429be4"
-                style={styleLogin.icon}
-              />
-              <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-                {value.errorEmail}
-              </Text>
+              <Icon name={"envelope"} size={30} style={styleLogin.icon} />
+              <Text style={styleLogin.errorText}>{value.errorEmail}</Text>
             </View>
-          )}
+          ) : null}
 
           <View>
             <TextInput
@@ -168,30 +175,34 @@ const Login = ({ isAuth, navigation }: ILogin): ReactElement => {
               onChangeText={(event: string) => passValidatin(event)}
             />
 
-            <Icon
-              name={"lock"}
-              size={30}
-              color="#429be4"
-              style={styleLogin.icon}
-            />
+            <Icon name={"lock"} size={30} style={styleLogin.icon} />
 
-            <Text style={{ color: "red", paddingLeft: 10, fontSize: 10 }}>
-              {value.errorPassword}
-            </Text>
+            <Text style={styleLogin.errorText}>{value.errorPassword}</Text>
           </View>
 
-          {toggleSign ? (
-            <Pressable style={styleLogin.button} onPress={handleLogin}>
-              <Text style={styleLogin.buttonTxt}>Log In</Text>
-            </Pressable>
-          ) : (
-            <Pressable style={styleLogin.button} onPress={handleLogin}>
-              <Text style={styleLogin.buttonTxt}>Register</Text>
-            </Pressable>
-          )}
+          <View
+            style={{
+              position: "relative",
+            }}
+          >
+            {toggleSign ? (
+              <Pressable style={styleLogin.button} onPress={handleLogin}>
+                <Text style={styleLogin.buttonTxt}>
+                  Log In
+                  <Icon name={"lock"} size={30} style={styleLogin.icon} />
+                </Text>
+              </Pressable>
+            ) : (
+              <Pressable style={styleLogin.button} onPress={handleLogin}>
+                <Text style={styleLogin.buttonTxt}>Register </Text>
+              </Pressable>
+            )}
+          </View>
           <Text onPress={handleToggleSign} style={styleLogin.wrappHaveAcc}>
-            {toggleSign && (
-              <Text style={styleLogin.haveAcc}> Don't have an acc?</Text>
+            {toggleSign ? (
+              <Text style={styleLogin.haveAcc}> Don't have an account?</Text>
+            ) : (
+              <Text style={styleLogin.haveAcc}> Back to</Text>
             )}
             {toggleSign ? "Register" : "Log In"}
           </Text>

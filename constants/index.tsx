@@ -1,0 +1,10 @@
+export const BG_TRASPARENT = "transparent";
+export const BG_LIST_ITEM = "#6d4cff";
+export const BORDER_COLOR = "#d8d8d8";
+export const WHITE_COLOR = "#ffffff";
+export const PRICE_COLOR = "#2a2a2a";
+export const OTHER_COLOR = "#57c9f0";
+export const BG_WHITE = "#e4e4e4";
+export const GRAY_COLOR = "#adadad";
+export const LEYLA_COLOR = "#6d4cff";
+export const BACKGROUND_PRIMARY = "#f7f7f7";
